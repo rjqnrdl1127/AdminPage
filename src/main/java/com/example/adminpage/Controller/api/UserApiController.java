@@ -1,42 +1,15 @@
 package com.example.adminpage.Controller.api;
 
-import com.example.adminpage.Controller.ifs.CrudInterface;
-import com.example.adminpage.Model.Network.Header;
+import com.example.adminpage.Controller.CrudController;
+import com.example.adminpage.Model.Entity.User;
 import com.example.adminpage.Model.Network.Request.UserApiRequest;
 import com.example.adminpage.Model.Network.Response.UserApiResponse;
-import com.example.adminpage.Service.UserApiLogicService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
+@Slf4j
 @RestController
 @RequestMapping("/api/user")
-public class UserApiController implements CrudInterface<UserApiRequest, UserApiResponse> {
+public class UserApiController extends CrudController<UserApiRequest, UserApiResponse, User> {
 
-    @Autowired
-    private UserApiLogicService userApiLogicService;
-
-
-    @Override
-    @PostMapping("")
-    public Header<UserApiResponse> create(@RequestBody Header<UserApiRequest> userApiRequest) {
-        return userApiLogicService.create(userApiRequest);
-    }
-
-    @Override
-    @GetMapping("/{id}")
-    public Header<UserApiResponse> read(@PathVariable(name = "id") Long id) {
-        return null;
-    }
-
-    @Override
-    @PutMapping("")
-    public Header<UserApiResponse> update(@RequestBody Header<UserApiRequest> userApiRequest) {
-        return null;
-    }
-
-    @Override
-    @DeleteMapping("/{id}")
-    public Header delete(@PathVariable(name = "id") Long id) {
-        return null;
-    }
 }

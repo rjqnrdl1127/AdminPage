@@ -24,8 +24,8 @@ public class CategoryRepositoryTest extends AdminPageApplicationTests {
         Category category = new Category();
         category.setType(type);
         category.setTitle(title);
-        category.setCreated_at(createdAt);
-        category.setCreated_by(createdBy);
+        category.setCreatedAt(createdAt);
+        category.setCreatedBy(createdBy);
 
         Category newCategory = categoryRepository.save(category);
 
