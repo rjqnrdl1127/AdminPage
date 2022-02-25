@@ -1,6 +1,9 @@
 package com.example.adminpage.Model.Entity;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
@@ -10,7 +13,6 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -19,15 +21,29 @@ import java.util.List;
 @EntityListeners(AuditingEntityListener.class)
 @Builder
 @Accessors(chain = true)
-public class Category {
+public class AdminUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String type;
+    private String account;
 
-    private String title;
+    private String password;
+
+    private String status;
+
+    private String role;
+
+    private LocalDateTime lastLoginAt;
+
+    private LocalDateTime passwordUpdatedAt;
+
+    private Integer loginFailCount;
+
+    private LocalDateTime registeredAt;
+
+    private LocalDateTime unregisteredAt;
 
     @CreatedDate
     private LocalDateTime createdAt;
@@ -40,9 +56,4 @@ public class Category {
 
     @LastModifiedBy
     private String updatedBy;
-
-    // Category 1 : N Partner
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "category")
-    @ToString.Exclude
-    private List<Partner> partnerList;
 }

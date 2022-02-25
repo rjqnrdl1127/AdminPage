@@ -9,6 +9,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -19,15 +20,29 @@ import java.util.List;
 @EntityListeners(AuditingEntityListener.class)
 @Builder
 @Accessors(chain = true)
-public class Category {
+public class OrderGroup {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long Id;
 
-    private String type;
+    private String status;
 
-    private String title;
+    private String orderType;
+
+    private String revAddress;
+
+    private String revName;
+
+    private String paymentType;
+
+    private BigDecimal totalPrice;
+
+    private Integer totalQuantity;
+
+    private LocalDateTime orderedAt;
+
+    private LocalDateTime arrivalDate;
 
     @CreatedDate
     private LocalDateTime createdAt;
@@ -41,8 +56,13 @@ public class Category {
     @LastModifiedBy
     private String updatedBy;
 
-    // Category 1 : N Partner
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "category")
+    // OrderGroup N : 1 User
+    @ManyToOne
     @ToString.Exclude
-    private List<Partner> partnerList;
+    private User user;
+
+    // OrderGroup 1 : N OrderDetail
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "orderGroup")
+    @ToString.Exclude
+    private List<OrderDetail> orderDetailList;
 }
